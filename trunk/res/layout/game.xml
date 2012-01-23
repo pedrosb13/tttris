@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:id="@+id/linearLayoutMain">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutScreen"
+        android:layout_width="fill_parent"
+        android:baselineAligned="false"
+        android:layout_height="fill_parent" 
+        android:layout_weight=".1">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutBoard"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" 
+            android:layout_weight=".3" 
+            android:paddingBottom="10dp">
+
+            <com.seavenois.tetris.BoardView
+                android:id="@+id/GameView"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent">                
+            </com.seavenois.tetris.BoardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutInfo"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" android:layout_weight=".7">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutNext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textViewNext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/next" android:layout_gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/imageViewNext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_launcher" 
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonPause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="II" android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:id="@+id/LinearLayoutScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/TextViewScoreLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/score" android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/TextViewScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" android:layout_gravity="right"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutButtons"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" android:layout_weight=".9">
+
+        <Button
+            android:id="@+id/ButtonRotateL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/ButtonMoveL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/ButtonMoveD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/ButtonMoveR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/buttonRotateR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+    </LinearLayout>
+
+</LinearLayout>
