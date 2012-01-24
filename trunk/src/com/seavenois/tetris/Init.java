@@ -6,16 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 
 public class Init extends Activity {
 	
-	private Button btnNewGame;
+	private Button btnNewGame, btnResumeGame, btnHighScores;
 	
     /** Called when the activity is first created. */    @Override
     public void onCreate(Bundle savedInstanceState) {
     	//Assign layouts
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.init);
         //Find and assign buttons
         btnNewGame = (Button) findViewById(R.id.buttonNewGame);
@@ -26,5 +28,26 @@ public class Init extends Activity {
         		startActivity(intent);
 			}
         });
+        btnResumeGame = (Button) findViewById(R.id.buttonResumeGame);
+        btnResumeGame.setEnabled(false);
+        btnResumeGame.setOnClickListener(new OnClickListener(){
+        	public void onClick(View v) {
+        		Intent intent = new Intent();
+        		intent.setComponent(new ComponentName("com.seavenois.tetris", "com.seavenois.tetris.Game"));
+        		//TODO: Somethig to load a game
+        		startActivity(intent);
+			}
+        });
+        btnHighScores = (Button) findViewById(R.id.buttonHighScores);
+        btnHighScores.setEnabled(false);
+        btnHighScores.setOnClickListener(new OnClickListener(){
+        	public void onClick(View v) {
+        		Intent intent = new Intent();
+        		intent.setComponent(new ComponentName("com.seavenois.tetris", "com.seavenois.tetris.HighScores"));
+        		//TODO: Implement HighScores activity
+        		startActivity(intent);
+			}
+        });
+        
     }
 }
