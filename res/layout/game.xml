@@ -43,22 +43,22 @@
                     android:id="@+id/textViewNext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/next" android:layout_gravity="center"/>
+                    android:text="@string/next" 
+                    android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/imageViewNext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher" 
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center" android:background="@drawable/nextpiece" android:layout_margin="10dp"/>
 
             </LinearLayout>
 
             <Button
                 android:id="@+id/buttonPause"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="II" android:layout_gravity="center"/>
+                android:layout_gravity="center" android:text="@string/pause" android:layout_marginTop="20dp"/>
 
             <LinearLayout
                 android:id="@+id/LinearLayoutScore"
@@ -76,7 +76,8 @@
                     android:id="@+id/TextViewScore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0" android:layout_gravity="right"/>
+                    android:text="0" 
+                    android:layout_gravity="right"/>
 
             </LinearLayout>
 
@@ -91,33 +92,38 @@
 
         <Button
             android:id="@+id/ButtonRotateL"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_weight=".2" 
+            android:drawableTop="@drawable/rotateleft"/>
 
         <Button
             android:id="@+id/ButtonMoveL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:layout_weight=".2" 
+            android:drawableTop="@drawable/moveleft"/>
 
         <Button
             android:id="@+id/ButtonMoveD"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_weight=".2" 
+            android:drawableTop="@drawable/movedown"/>
 
         <Button
             android:id="@+id/ButtonMoveR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:layout_weight=".2" 
+            android:drawableTop="@drawable/moveright"/>
 
         <Button
             android:id="@+id/buttonRotateR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:layout_weight=".2" 
+            android:drawableTop="@drawable/rotateright"/>
 
     </LinearLayout>
 

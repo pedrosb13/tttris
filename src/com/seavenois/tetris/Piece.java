@@ -21,7 +21,7 @@ public class Piece {
 	Piece(){
 		generator = new Random();
 		type = (byte) generator.nextInt(7);
-		//type = 0;//TESTING
+		//type = 2;//TESTING
 		color = (byte) (type + 1);
 		rotation = 0;
 		box = new boolean[20][10];
@@ -151,6 +151,8 @@ public class Piece {
 		return true;
 	}
 	
+	
+	//TODO: Check what happends if the piece is behing a wall
 	public boolean rotateRight(){
 		int i = 0;
 		int j = 0;
@@ -355,6 +357,102 @@ public class Piece {
 						box[i + 2][j] = false;
 						break;
 				}
+				break;
+			case Values.PIECE_2:
+				//Switch new rotation state
+				switch (rotation){
+					case 1: //From horizontal right-side-up to vertical top-side-left
+						//Find the first occupied box
+						while (box[i][j] == false){
+							j++;
+							if (j == 9){
+								j = 0;
+								i++;
+							}
+						}
+						//Check availability
+						if (board[i][j - 1] == true)
+							return false;
+						if (board[i + 2][j - 1] == true)
+							return false;
+						if (board[i + 2][j] == true)
+							return false;
+						//Perform transformation
+						box[i][j - 1] = true;
+						box[i + 2][j - 1] = true;
+						box[i + 2][j] = true;
+						box[i][j] = false;
+						box[i + 1][j - 2] = false;
+						box[i + 1][j] = false;
+						break;
+					case 2: //From vertical bottom-side-right to horizontal left-side-down
+						//Find the first occupied box
+						while (box[i][j] == false){
+							j++;
+							if (j == 9){
+								j = 0;
+								i++;
+							}
+						}
+						//Check availability
+						if (board[i][j - 1] == true)
+							return false;
+						if (board[i][j + 1] == true)
+							return false;
+						if (board[i + 1][j - 1] == true)
+							return false;						
+						//Perform transformation
+						box[i][j - 1] = true;
+						box[i][j + 1] = true;
+						box[i + 1][j - 1] = true;
+						box[i + 1][j] = false;
+						box[i + 2][j] = false;
+						box[i + 2][j + 1] = false;
+						break;
+					case 3: //From horizontal right-side-down to vertical top-side-left
+						//Find the first occupied box
+						while (box[i][j] == false){
+							j++;
+							if (j == 9){
+								j = 0;
+								i++;
+							}
+						}
+						//Check availability
+						if (board[i + i][j + 2] == true)
+							return false;
+						if (board[i + 2][j + 2] == true)
+							return false;
+						//Perform transformation
+						box[i + 1][j + 2] = true;
+						box[i + 2][j + 2] = true;
+						box[i][j] = false;
+						box[i + 1][j] = false;
+						break;
+					case 0: //From vertical top-side-left to horizontal right-side-up
+						//Find the first occupied box
+						while (box[i][j] == false){
+							j++;
+							if (j == 9){
+								j = 0;
+								i++;
+							}
+						}
+						//Check availability
+						if (board[i + 1][j - 1] == true)
+							return false;
+						if (board[i + 1][j] == true)
+							return false;
+						//Perform transformation
+						box[i + 1][j - 1] = true;
+						box[i + 1][j] = true;
+						box[i][j] = false;
+						box[i + 2][j + 1] = false;
+						break;
+				}
+				break;
+			case Values.PIECE_3:
+				//Is the cube, so, do nothing!
 				break;
 		}
 		return true;

@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class Game extends Activity {
 	
@@ -24,11 +26,13 @@ public class Game extends Activity {
 	Piece nextPiece;
 	boolean pieceOnGame;
 	Button btnMoveRight, btnMoveLeft, btnMoveDown, btnRotateRight, btnRotateLeft;
+	ImageView nextPieceImg;
 	
     /** Called when the activity is first created. */    @Override
     public void onCreate(Bundle savedInstanceState) {
     	//Assign layouts
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.game);
         
         //Assign buttons
@@ -62,6 +66,7 @@ public class Game extends Activity {
         //Initialize pieces
         currentPiece = new Piece();
         nextPiece = new Piece();
+        nextPieceImg = (ImageView) findViewById(R.id.imageViewNext);
         //Start the time bucle
         timer = new CountDownTimer(150000, 1000) {
 	        public void onTick(long millisUntilFinished) {
@@ -111,9 +116,32 @@ public class Game extends Activity {
 	    		reDraw();
 			}
 	    });
-	    
 	    //Start the game
 	    currentPiece.start();
+	    //Set image for next piece
+		switch(nextPiece.type){
+		case Values.PIECE_0:
+			nextPieceImg.setImageResource(R.drawable.piece0);
+			break;
+		case Values.PIECE_1:
+			nextPieceImg.setImageResource(R.drawable.piece1);
+			break;
+		case Values.PIECE_2:
+			nextPieceImg.setImageResource(R.drawable.piece2);
+			break;
+		case Values.PIECE_3:
+			nextPieceImg.setImageResource(R.drawable.piece3);
+			break;
+		case Values.PIECE_4:
+			nextPieceImg.setImageResource(R.drawable.piece4);
+			break;
+		case Values.PIECE_5:
+			nextPieceImg.setImageResource(R.drawable.piece5);
+			break;
+		case Values.PIECE_6:
+			nextPieceImg.setImageResource(R.drawable.piece6);
+			break;
+		}
     }
     
     //The time bucle
@@ -134,6 +162,30 @@ public class Game extends Activity {
 			currentPiece = nextPiece;
 			currentPiece.start();
 			nextPiece = new Piece();
+			//Set the next piece image
+			switch(nextPiece.type){
+			case Values.PIECE_0:
+				nextPieceImg.setImageResource(R.drawable.piece0);
+				break;
+			case Values.PIECE_1:
+				nextPieceImg.setImageResource(R.drawable.piece1);
+				break;
+			case Values.PIECE_2:
+				nextPieceImg.setImageResource(R.drawable.piece2);
+				break;
+			case Values.PIECE_3:
+				nextPieceImg.setImageResource(R.drawable.piece3);
+				break;
+			case Values.PIECE_4:
+				nextPieceImg.setImageResource(R.drawable.piece4);
+				break;
+			case Values.PIECE_5:
+				nextPieceImg.setImageResource(R.drawable.piece5);
+				break;
+			case Values.PIECE_6:
+				nextPieceImg.setImageResource(R.drawable.piece6);
+				break;
+			}
 		}
 		//Copy the board info to the piece
     	currentPiece.readBoard(box);
