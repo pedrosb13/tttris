@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary How to translate the app to your own language
 
 ==1) Check if your language already exists==
 
