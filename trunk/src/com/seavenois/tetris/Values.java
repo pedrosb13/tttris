@@ -2,6 +2,9 @@ package com.seavenois.tetris;
 
 public final class Values {
 	
+	//Score codes
+	public static final int SCORE_PER_ROW = 1000;
+	
 	//Color codes
 	public static final byte COLOR_NONE = 0;
 	public static final byte COLOR_RED = 1;
