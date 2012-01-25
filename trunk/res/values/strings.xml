@@ -9,5 +9,8 @@
     <string name="highScores">High Scores</string>
 	<string name="pause">\nPause\n</string>
 	<string name="resume">\nResume\n</string>
+	<string name="accesibilityLogo">"Logo"</string>
+	<string name="accesibilityCombo">"Combo"</string>
+	<string name="accesibilityNextPiece">"Next Piece"</string>
 	
 </resources>

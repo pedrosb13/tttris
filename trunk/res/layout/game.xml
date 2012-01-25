@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" android:id="@+id/linearLayoutMain">
+    android:orientation="vertical" 
+    android:baselineAligned="false"
+    android:id="@+id/linearLayoutMain">
 
     <LinearLayout
         android:id="@+id/linearLayoutScreen"
@@ -11,12 +13,13 @@
         android:layout_height="fill_parent" 
         android:layout_weight=".1">
 
+        <!-- I know that Nested weights are bad for performance, I know -->
         <LinearLayout
             android:id="@+id/linearLayoutBoard"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical" 
-            android:layout_weight=".3" 
+            android:orientation="vertical"            
+            android:layout_weight=".3"
             android:paddingBottom="10dp">
 
             <com.seavenois.tetris.BoardView
@@ -31,34 +34,32 @@
             android:id="@+id/linearLayoutInfo"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical" android:layout_weight=".7">
+            android:orientation="vertical" 
+            android:layout_weight=".7">
 
-            <LinearLayout
-                android:id="@+id/linearLayoutNext"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textViewNext"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:text="@string/next" 
+                android:layout_gravity="center"/>
 
-                <TextView
-                    android:id="@+id/textViewNext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/next" 
-                    android:layout_gravity="center"/>
-
-                <ImageView
-                    android:id="@+id/imageViewNext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" android:background="@drawable/nextpiece" android:layout_margin="10dp"/>
-
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/imageViewNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" 
+                android:background="@drawable/nextpiece" 
+                android:contentDescription="@string/accesibilityNextPiece"
+                android:layout_margin="10dp"/>
 
             <Button
                 android:id="@+id/buttonPause"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center" android:text="@string/pause" android:layout_marginTop="20dp"/>
+                android:layout_gravity="center" 
+                android:text="@string/pause" 
+                android:layout_marginTop="20dp"/>
 
             <LinearLayout
                 android:id="@+id/LinearLayoutScore"
@@ -70,15 +71,21 @@
                     android:id="@+id/TextViewScoreLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/score" android:layout_gravity="center"/>
+                    android:text="@string/score" 
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/TextViewScore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0" 
                     android:layout_gravity="right"/>
-                <ImageView android:layout_height="wrap_content" android:layout_weight=".1" android:src="@drawable/alpha" android:layout_width="fill_parent" android:id="@+id/imageViewCombo"></ImageView>
+                <ImageView  
+                    android:layout_height="0dip"
+                    android:layout_weight=".1" 
+                    android:src="@drawable/alpha" 
+                    android:layout_width="fill_parent"
+                    android:contentDescription="@string/accesibilityCombo"
+                    android:id="@+id/imageViewCombo"/>
 
             </LinearLayout>
 
@@ -89,8 +96,10 @@
     <LinearLayout
         android:id="@+id/linearLayoutButtons"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" android:layout_weight=".9">
+        android:layout_height="fill_parent" 
+        android:layout_weight=".9">
 
+        <!-- I know that Nested weights are bad for performance, I know -->
         <Button
             android:id="@+id/ButtonRotateL"
             android:layout_width="fill_parent"
