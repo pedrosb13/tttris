@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Game extends Activity {
 	
@@ -24,6 +25,11 @@ public class Game extends Activity {
 	boolean pieceOnGame;
 	Button btnMoveRight, btnMoveLeft, btnMoveDown, btnRotateRight, btnRotateLeft;
 	ImageView nextPieceImg;
+	//Score and combo
+	TextView textScore;
+	ImageView imageCombo; //TODO: add to the layout
+	int score = 0;
+	int combo = 1;
 	
     /** Called when the activity is first created. */    
 	@Override
@@ -46,6 +52,10 @@ public class Game extends Activity {
         int height = (int) (display.getHeight() * 0.9);
         gameBoard = (BoardView) findViewById(R.id.GameView);
         d = (int) (width * 0.85 / 10);
+        
+        //Asign score and combo resources
+        textScore = (TextView) findViewById(R.id.TextViewScore);
+        imageCombo = (ImageView) findViewById(R.id.imageViewCombo);
         
         //Initialize boxes and draw the wall
         box = new Box[20][10];
@@ -153,9 +163,9 @@ public class Game extends Activity {
     	//Undraw the current piece
     	unDraw();
     	
-    	//Try to move down
+    	//Try to move down.
 		if (currentPiece.moveDown() == false){
-			//If couldnt move fix the blocks currently occupied, and start a new piece
+			//If couldnt move fix the blocks currently occupied...
 			for (int i = 0; i < 20; i++)
 	        	for (int j = 0; j < 10; j++){
 	        		if (currentPiece.box[i][j] == true){
@@ -163,6 +173,12 @@ public class Game extends Activity {
 	        			gameBoard.setColor(i, j, currentPiece.getColor());
 	        		}
 	        	}
+			/// ...check if there is any full row...
+			if (lookForRows() == false){
+				combo = 1; //If nothing has been removed, set combo to 1
+				imageCombo.setImageResource(R.drawable.alpha);
+			}
+			// ... and start a new piece
 			currentPiece = nextPiece;
 			currentPiece.start();
 			nextPiece = new Piece();
@@ -197,6 +213,53 @@ public class Game extends Activity {
     	reDraw();
     }
     
+    //Look for complete rows
+    public boolean lookForRows(){
+    	boolean somethingRemoved = false; //To determine if some row has been removed to keep the combo
+    	boolean full = true;
+    	for (int i = 1; i < 20; i++){
+    		full = true;
+    		for (int j = 0; j < 10; j++){
+    			if (box[i][j].getColor() == Values.COLOR_NONE)
+    				full = false;
+    		}
+    		if (full == true){
+    			somethingRemoved = true;
+    			removeRow(i);
+    		}
+    	}
+    	return somethingRemoved;
+    }
+    
+    
+    //Remove row and score
+    public void removeRow(int row){
+    	score = score + Values.SCORE_PER_ROW * combo;
+    	textScore.setText(Integer.toString(score));
+    	//Setcombo multiplier
+    	combo = combo * 2;
+    	if (combo == 32)
+    		combo = 16;
+    	switch (combo){
+    		case 2:
+    			imageCombo.setImageResource(R.drawable.x2);
+    			break;
+    		case 4:
+    			imageCombo.setImageResource(R.drawable.x4);
+    			break;
+    		case 8:
+    			imageCombo.setImageResource(R.drawable.x8);
+    			break;
+    		case 16:
+    			imageCombo.setImageResource(R.drawable.x16);
+    			break;
+    	}
+    	for (int i = row; i > 1; i--)
+    		for (int j = 0; j < 10; j++){
+    			box[i][j].setColor(box[i - 1][j].getColor());
+    			gameBoard.setColor(i, j, (byte) box[i - 1][j].getColor());
+    		}
+    }
     //Redraw the screen
     public void reDraw(){
     	//Read where the piece is and colorize

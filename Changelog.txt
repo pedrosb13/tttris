@@ -1,6 +1,14 @@
 TTTris changelog
 
 *****************************
+v0.3-alpha - 24 Jan 2012 
+-Full rows vanishes
+-Score system added
+-Combo multiplier implemented
+******************************
+
+
+*****************************
 v0.2-alpha - 24 Jan 2012 
 -Fixed problems when moving pieces under some conditions
 -Fixed piece rotating for the 'L'-shaped piece

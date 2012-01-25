@@ -19,7 +19,7 @@ public class Piece {
 	Piece(){
 		generator = new Random();
 		type = (byte) generator.nextInt(7);
-		//type = 0;//TESTING, change to be all the same piece 
+		//type = 3;//TESTING, change to be all the same piece 
 		color = (byte) (type + 1);
 		rotation = 0;
 		box = new boolean[20][10];

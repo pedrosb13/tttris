@@ -78,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:text="0" 
                     android:layout_gravity="right"/>
+                <ImageView android:layout_height="wrap_content" android:layout_weight=".1" android:src="@drawable/alpha" android:layout_width="fill_parent" android:id="@+id/imageViewCombo"></ImageView>
 
             </LinearLayout>
 
