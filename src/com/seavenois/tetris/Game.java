@@ -1,11 +1,8 @@
 package com.seavenois.tetris;
 
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,7 +25,8 @@ public class Game extends Activity {
 	Button btnMoveRight, btnMoveLeft, btnMoveDown, btnRotateRight, btnRotateLeft;
 	ImageView nextPieceImg;
 	
-    /** Called when the activity is first created. */    @Override
+    /** Called when the activity is first created. */    
+	@Override
     public void onCreate(Bundle savedInstanceState) {
     	//Assign layouts
         super.onCreate(savedInstanceState);
@@ -63,10 +61,12 @@ public class Game extends Activity {
         	}
         	y = y + d;
         };
+        
         //Initialize pieces
         currentPiece = new Piece();
         nextPiece = new Piece();
         nextPieceImg = (ImageView) findViewById(R.id.imageViewNext);
+        
         //Start the time bucle
         timer = new CountDownTimer(150000, 1000) {
 	        public void onTick(long millisUntilFinished) {
@@ -116,9 +116,12 @@ public class Game extends Activity {
 	    		reDraw();
 			}
 	    });
+	    
 	    //Start the game
 	    currentPiece.start();
+	    
 	    //Set image for next piece
+	    //Has to be done here, or there is no next piece image at the beggining
 		switch(nextPiece.type){
 		case Values.PIECE_0:
 			nextPieceImg.setImageResource(R.drawable.piece0);
@@ -149,9 +152,10 @@ public class Game extends Activity {
     	
     	//Undraw the current piece
     	unDraw();
-    	//Try to move
+    	
+    	//Try to move down
 		if (currentPiece.moveDown() == false){
-			//Then: fix the blocks currently occupied, and start a new piece
+			//If couldnt move fix the blocks currently occupied, and start a new piece
 			for (int i = 0; i < 20; i++)
 	        	for (int j = 0; j < 10; j++){
 	        		if (currentPiece.box[i][j] == true){
@@ -162,29 +166,30 @@ public class Game extends Activity {
 			currentPiece = nextPiece;
 			currentPiece.start();
 			nextPiece = new Piece();
+			
 			//Set the next piece image
 			switch(nextPiece.type){
-			case Values.PIECE_0:
-				nextPieceImg.setImageResource(R.drawable.piece0);
-				break;
-			case Values.PIECE_1:
-				nextPieceImg.setImageResource(R.drawable.piece1);
-				break;
-			case Values.PIECE_2:
-				nextPieceImg.setImageResource(R.drawable.piece2);
-				break;
-			case Values.PIECE_3:
-				nextPieceImg.setImageResource(R.drawable.piece3);
-				break;
-			case Values.PIECE_4:
-				nextPieceImg.setImageResource(R.drawable.piece4);
-				break;
-			case Values.PIECE_5:
-				nextPieceImg.setImageResource(R.drawable.piece5);
-				break;
-			case Values.PIECE_6:
-				nextPieceImg.setImageResource(R.drawable.piece6);
-				break;
+				case Values.PIECE_0:
+					nextPieceImg.setImageResource(R.drawable.piece0);
+					break;
+				case Values.PIECE_1:
+					nextPieceImg.setImageResource(R.drawable.piece1);
+					break;
+				case Values.PIECE_2:
+					nextPieceImg.setImageResource(R.drawable.piece2);
+					break;
+				case Values.PIECE_3:
+					nextPieceImg.setImageResource(R.drawable.piece3);
+					break;
+				case Values.PIECE_4:
+					nextPieceImg.setImageResource(R.drawable.piece4);
+					break;
+				case Values.PIECE_5:
+					nextPieceImg.setImageResource(R.drawable.piece5);
+					break;
+				case Values.PIECE_6:
+					nextPieceImg.setImageResource(R.drawable.piece6);
+					break;
 			}
 		}
 		//Copy the board info to the piece
@@ -192,6 +197,7 @@ public class Game extends Activity {
     	reDraw();
     }
     
+    //Redraw the screen
     public void reDraw(){
     	//Read where the piece is and colorize
     	for (int i = 0; i < 20; i++)
@@ -202,8 +208,9 @@ public class Game extends Activity {
         		}
         	}
     }
+    
+    //Undraw the current piece before moving
     public void unDraw(){
-    	//Undraw the current piece before moving
     	for (int i = 0; i < 20; i++)
         	for (int j = 0; j < 10; j++){
         		if (currentPiece.box[i][j] == true){

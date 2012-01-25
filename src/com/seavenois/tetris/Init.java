@@ -13,12 +13,14 @@ public class Init extends Activity {
 	
 	private Button btnNewGame, btnResumeGame, btnHighScores;
 	
-    /** Called when the activity is first created. */    @Override
+    /** Called when the activity is first created. */    
+	@Override
     public void onCreate(Bundle savedInstanceState) {
     	//Assign layouts
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.init);
+        
         //Find and assign buttons
         btnNewGame = (Button) findViewById(R.id.buttonNewGame);
         btnNewGame.setOnClickListener(new OnClickListener(){
@@ -29,17 +31,17 @@ public class Init extends Activity {
 			}
         });
         btnResumeGame = (Button) findViewById(R.id.buttonResumeGame);
-        btnResumeGame.setEnabled(false);
+        btnResumeGame.setEnabled(false); //Disabled (unimplemented feature)
         btnResumeGame.setOnClickListener(new OnClickListener(){
         	public void onClick(View v) {
         		Intent intent = new Intent();
         		intent.setComponent(new ComponentName("com.seavenois.tetris", "com.seavenois.tetris.Game"));
-        		//TODO: Somethig to load a game
+        		//TODO: Something to load a game. First I need to develop something to load the game
         		startActivity(intent);
 			}
         });
         btnHighScores = (Button) findViewById(R.id.buttonHighScores);
-        btnHighScores.setEnabled(false);
+        btnHighScores.setEnabled(false); //Disabled (unimplemented feature)
         btnHighScores.setOnClickListener(new OnClickListener(){
         	public void onClick(View v) {
         		Intent intent = new Intent();
