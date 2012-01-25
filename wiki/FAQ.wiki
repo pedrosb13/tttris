@@ -1,4 +1,4 @@
-#Frequently asked questions
+#summary Frequently asked questions
 
 *Q: What is this?*
 
