@@ -1,0 +1,38 @@
+=Tttris Changelog=
+_inverse cronological_
+
+
+||v0.3-alpha || 24 Jan 2012 ||
+
+  * -Full rows vanishes.
+  * -Score system added.
+  * -Combo multiplier implemented.
+
+
+||v0.2-alpha || 24 Jan 2012 ||
+
+  * -Fixed problems when moving pieces under some conditions.
+  * -Fixed piece rotating for the 'L'-shaped piece.
+  * -Code intensively commented.
+  * -Started Spanish translation.
+
+
+||v0.1.1-alpha || 24 Jan 2012 ||
+
+  * -Initial layout designed. 
+  * -Iconic buttons. 
+  * -Next piece image added.
+  * -Some other UI and layout improvements.
+
+
+||v0.1-alpha || 23 Jan 2012 ||
+
+  * -Game engine working. 
+  * -Pieces fall one after another (but they don't score, and game does never ends). 
+  * -They can be moved left and right.
+  * -The bar, the 'L'-shaped pieces and the box can be rotated to the right.
+
+
+||v0.0 || 21 Jan 2012 ||
+
+  * -Projects starts.
