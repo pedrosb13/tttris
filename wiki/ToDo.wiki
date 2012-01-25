@@ -9,8 +9,6 @@ This is the list of things we have on mind to implement. Any suggestion is alway
   * "High scores"
   * Score share system
   * Credits page
-  * Application icon
-  * Main screen image
   * Vibration on some game events
   * Audio
   * Preferences menu
