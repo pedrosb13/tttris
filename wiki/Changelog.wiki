@@ -1,6 +1,4 @@
-=Tttris Changelog=
-_inverse cronological_
-
+#summary Application chagelog
 
 ||v0.3-alpha || 24 Jan 2012 ||
 
