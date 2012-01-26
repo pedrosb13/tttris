@@ -1,6 +1,7 @@
 package com.seavenois.tetris;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Display;
@@ -128,6 +129,7 @@ public class Game extends Activity {
 	    });
 	    
 	    //Start the game
+	    textScore.setText("0");
 	    currentPiece.start();
 	    
 	    //Set image for next piece
@@ -178,6 +180,9 @@ public class Game extends Activity {
 				combo = 1; //If nothing has been removed, set combo to 1
 				imageCombo.setImageResource(R.drawable.alpha);
 			}
+			//... check if the game is loose... 
+			if (gameLoose() == true)
+				finish();
 			// ... and start a new piece
 			currentPiece = nextPiece;
 			currentPiece.start();
@@ -213,7 +218,40 @@ public class Game extends Activity {
     	reDraw();
     }
     
-    //Look for complete rows
+    //If there is something in the two first rows before starting a new piece, the game is loose
+    private boolean gameLoose() {
+    	int hScore1, hScore2, hScore3, aux;
+		for (int j = 0; j < 10; j++)
+			if (box[1][j].getColor() != Values.COLOR_NONE)
+				return true;
+		//What to do on game over?
+		//Notify the user TODO
+		//Add high scores if needed TODO: Consider if adding dates
+		SharedPreferences highScores = getSharedPreferences("highScores", 0);
+		hScore1 = highScores.getInt("hScore1", 0);
+		hScore2 = highScores.getInt("hScore2", 0);
+		hScore3 = highScores.getInt("hScore3", 0);
+		if(score > hScore3)
+			hScore3 = score;
+		if(hScore3 > hScore2){
+			aux = hScore2;
+			hScore2 = hScore3;
+			hScore3 = aux;
+		}
+		if(hScore2 > hScore1){
+			aux = hScore1;
+			hScore1 = hScore2;
+			hScore2 = aux;
+		}
+		SharedPreferences.Editor editor = highScores.edit();
+		editor.putInt("hScore1", 0);
+		editor.putInt("hScore2", 0);
+		editor.putInt("hScore3", 0);
+		editor.commit();
+		return false;
+	}
+
+	//Look for complete rows
     public boolean lookForRows(){
     	boolean somethingRemoved = false; //To determine if some row has been removed to keep the combo
     	boolean full = true;
