@@ -1,5 +1,16 @@
 TTTris changelog
 
+
+*****************************
+v0.5-alpha - 26 Jan 2012 
+-Every piece can be rotated right
+-Fixed a bug when it impossible to rotate a piece
+-Initial score marker is set to 0
+-Game can be loose now
+-High scores are saved (but they can not be seen anywhere yet)
+******************************
+
+
 *****************************
 v0.4-alpha - 25 Jan 2012 
 -Added logo and application icon
