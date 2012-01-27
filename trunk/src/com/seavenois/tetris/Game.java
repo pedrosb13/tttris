@@ -1,9 +1,12 @@
 package com.seavenois.tetris;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,13 +27,16 @@ public class Game extends Activity {
 	Piece currentPiece;
 	Piece nextPiece;
 	boolean pieceOnGame;
-	Button btnMoveRight, btnMoveLeft, btnMoveDown, btnRotateRight, btnRotateLeft;
+	Button btnMoveRight, btnMoveLeft, btnMoveDown, btnRotateRight, btnRotateLeft, btnPause;
 	ImageView nextPieceImg;
 	//Score and combo
 	TextView textScore;
 	ImageView imageCombo; //TODO: add to the layout
 	int score = 0;
 	int combo = 1;
+	Vibrator vibrator;
+	//The pause indicator
+	boolean game;
 	
     /** Called when the activity is first created. */    
 	@Override
@@ -46,6 +52,7 @@ public class Game extends Activity {
         btnMoveDown = (Button) findViewById(R.id.ButtonMoveD);
         btnRotateRight = (Button) findViewById(R.id.buttonRotateR);
         btnRotateLeft = (Button) findViewById(R.id.ButtonRotateL);
+        btnPause = (Button) findViewById(R.id.buttonPause);
         
         //Get measures for the board
         display = getWindowManager().getDefaultDisplay(); 
@@ -73,12 +80,17 @@ public class Game extends Activity {
         	y = y + d;
         };
         
+        
+        //initialize vibrator
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        
         //Initialize pieces
         currentPiece = new Piece();
         nextPiece = new Piece();
         nextPieceImg = (ImageView) findViewById(R.id.imageViewNext);
         
         //Start the time bucle
+        game = true;
         timer = new CountDownTimer(150000, 1000) {
 	        public void onTick(long millisUntilFinished) {
 	        	gameAction();
@@ -95,6 +107,7 @@ public class Game extends Activity {
 	    	public void onClick(View v) {
 	    		unDraw();
 	    		currentPiece.moveRight();
+	    		vibrator.vibrate(30);
 	    		reDraw();
 			}
 	    });
@@ -102,6 +115,7 @@ public class Game extends Activity {
 	    	public void onClick(View v) {
 	    		unDraw();
 	    		currentPiece.moveLeft();
+	    		vibrator.vibrate(30);
 	    		reDraw();
 			}
 	    });
@@ -110,6 +124,7 @@ public class Game extends Activity {
 	    	public void onClick(View v) {
 	    		unDraw();
 	    		currentPiece.moveDown();
+	    		vibrator.vibrate(30);
 	    		reDraw();
 			}
 	    });
@@ -117,14 +132,29 @@ public class Game extends Activity {
 	    	public void onClick(View v) {
 	    		unDraw();
 	    		currentPiece.rotateRight();
+	    		vibrator.vibrate(30);
 	    		reDraw();
 			}
 	    });
 	    btnRotateLeft.setOnClickListener(new OnClickListener(){
 	    	public void onClick(View v) {
 	    		unDraw();
-	    		//currentPiece.rotateLeft(); TODO
+	    		//currentPiece.rotateLeft(); TODO 
+	    		vibrator.vibrate(30);
 	    		reDraw();
+			}
+	    });
+	    btnPause.setOnClickListener(new OnClickListener(){
+	    	public void onClick(View v) {
+	    		if (game == true){
+	    			game = false;
+	    			btnPause.setText(R.string.resume);
+	    		}
+	    		else{
+	    			game = true;
+	    			btnPause.setText(R.string.pause);
+	    		}
+	    		vibrator.vibrate(30);	    		
 			}
 	    });
 	    
@@ -161,71 +191,77 @@ public class Game extends Activity {
     
     //The time bucle
     public void gameAction(){
-    	
-    	//Undraw the current piece
-    	unDraw();
-    	
-    	//Try to move down.
-		if (currentPiece.moveDown() == false){
-			//If couldnt move fix the blocks currently occupied...
-			for (int i = 0; i < 20; i++)
-	        	for (int j = 0; j < 10; j++){
-	        		if (currentPiece.box[i][j] == true){
-	        			box[i][j].setColor(currentPiece.getColor());
-	        			gameBoard.setColor(i, j, currentPiece.getColor());
-	        		}
-	        	}
-			/// ...check if there is any full row...
-			if (lookForRows() == false){
-				combo = 1; //If nothing has been removed, set combo to 1
-				imageCombo.setImageResource(R.drawable.alpha);
+    	if (game == true){
+	    	//Undraw the current piece
+	    	unDraw();
+	    	
+	    	//Try to move down.
+			if (currentPiece.moveDown() == false){
+				//If couldnt move fix the blocks currently occupied...
+				for (int i = 0; i < 20; i++)
+		        	for (int j = 0; j < 10; j++){
+		        		if (currentPiece.box[i][j] == true){
+		        			box[i][j].setColor(currentPiece.getColor());
+		        			gameBoard.setColor(i, j, currentPiece.getColor());
+		        		}
+		        	}
+				/// ...check if there is any full row...
+				if (lookForRows() == false){
+					combo = 1; //If nothing has been removed, set combo to 1
+					imageCombo.setImageResource(R.drawable.alpha);
+				}
+				//... check if the game is loose... 
+				if (gameLoose() == true)
+					finish();
+				// ... and start a new piece
+				currentPiece = nextPiece;
+				currentPiece.start();
+				nextPiece = new Piece();
+				
+				//Set the next piece image
+				switch(nextPiece.type){
+					case Values.PIECE_0:
+						nextPieceImg.setImageResource(R.drawable.piece0);
+						break;
+					case Values.PIECE_1:
+						nextPieceImg.setImageResource(R.drawable.piece1);
+						break;
+					case Values.PIECE_2:
+						nextPieceImg.setImageResource(R.drawable.piece2);
+						break;
+					case Values.PIECE_3:
+						nextPieceImg.setImageResource(R.drawable.piece3);
+						break;
+					case Values.PIECE_4:
+						nextPieceImg.setImageResource(R.drawable.piece4);
+						break;
+					case Values.PIECE_5:
+						nextPieceImg.setImageResource(R.drawable.piece5);
+						break;
+					case Values.PIECE_6:
+						nextPieceImg.setImageResource(R.drawable.piece6);
+						break;
+				}
 			}
-			//... check if the game is loose... 
-			if (gameLoose() == true)
-				finish();
-			// ... and start a new piece
-			currentPiece = nextPiece;
-			currentPiece.start();
-			nextPiece = new Piece();
-			
-			//Set the next piece image
-			switch(nextPiece.type){
-				case Values.PIECE_0:
-					nextPieceImg.setImageResource(R.drawable.piece0);
-					break;
-				case Values.PIECE_1:
-					nextPieceImg.setImageResource(R.drawable.piece1);
-					break;
-				case Values.PIECE_2:
-					nextPieceImg.setImageResource(R.drawable.piece2);
-					break;
-				case Values.PIECE_3:
-					nextPieceImg.setImageResource(R.drawable.piece3);
-					break;
-				case Values.PIECE_4:
-					nextPieceImg.setImageResource(R.drawable.piece4);
-					break;
-				case Values.PIECE_5:
-					nextPieceImg.setImageResource(R.drawable.piece5);
-					break;
-				case Values.PIECE_6:
-					nextPieceImg.setImageResource(R.drawable.piece6);
-					break;
-			}
-		}
-		//Copy the board info to the piece
-    	currentPiece.readBoard(box);
-    	reDraw();
+			//Copy the board info to the piece
+	    	currentPiece.readBoard(box);
+	    	reDraw();
+    	}
     }
     
     //If there is something in the two first rows before starting a new piece, the game is loose
     private boolean gameLoose() {
     	int hScore1, hScore2, hScore3, aux;
+    	boolean loose = false;
 		for (int j = 0; j < 10; j++)
 			if (box[1][j].getColor() != Values.COLOR_NONE)
-				return true;
+				loose = true;
+		if (loose == false)
+			return false;
 		//What to do on game over?
-		//Notify the user TODO
+		//Notify the user TODO: (Maybe deactivate buttons?)
+		game = false;
+		vibrator.vibrate(1000);
 		//Add high scores if needed TODO: Consider if adding dates
 		SharedPreferences highScores = getSharedPreferences("highScores", 0);
 		hScore1 = highScores.getInt("hScore1", 0);
@@ -244,11 +280,12 @@ public class Game extends Activity {
 			hScore2 = aux;
 		}
 		SharedPreferences.Editor editor = highScores.edit();
-		editor.putInt("hScore1", 0);
-		editor.putInt("hScore2", 0);
-		editor.putInt("hScore3", 0);
+		editor.putInt("hScore1", hScore1);
+		editor.putInt("hScore2", hScore2);
+		editor.putInt("hScore3", hScore3);
 		editor.commit();
-		return false;
+		Log.e("HS1", Integer.toString(highScores.getInt("hScore1", 2)));
+		return true;
 	}
 
 	//Look for complete rows
