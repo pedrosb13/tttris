@@ -41,12 +41,10 @@ public class Init extends Activity {
 			}
         });
         btnHighScores = (Button) findViewById(R.id.buttonHighScores);
-        btnHighScores.setEnabled(false); //Disabled (unimplemented feature)
         btnHighScores.setOnClickListener(new OnClickListener(){
         	public void onClick(View v) {
         		Intent intent = new Intent();
         		intent.setComponent(new ComponentName("com.seavenois.tetris", "com.seavenois.tetris.HighScores"));
-        		//TODO: Implement HighScores activity
         		startActivity(intent);
 			}
         });

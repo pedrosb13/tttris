@@ -177,6 +177,10 @@ public class Piece {
 							}
 						}
 						//Check availability
+						if (i == 18)
+							return false;
+						if (i == 19)
+							return false;
 						if (i == 0)
 							return false;
 						if (board[i - 1][j + 2] == true)
@@ -249,6 +253,10 @@ public class Piece {
 							}
 						}
 						//Check availability
+						if (i == 18)
+							return false;
+						if (i == 19)
+							return false;
 						if (i == 0)
 							return false;
 						if (board[i - 1][j + 2] == true)
@@ -326,6 +334,10 @@ public class Piece {
 							}
 						}
 						//Check availability
+						if (i == 18)
+							return false;
+						if (i == 19)
+							return false;
 						if (board[i][j + 1] == true)
 							return false;
 						if (board[i][j + 2] == true)
@@ -376,6 +388,10 @@ public class Piece {
 							}
 						}
 						//Check availability
+						if (i == 18)
+							return false;
+						if (i == 19)
+							return false;
 						if (board[i + 2][j + 1] == true)
 							return false;
 						if (board[i + 2][j + 2] == true)
@@ -421,16 +437,20 @@ public class Piece {
 			case Values.PIECE_2:
 				//Switch new rotation state
 				switch (rotation + 1){
-					case 1: //From horizontal right-side-up to vertical top-side-left
+					case 1: //From horizontal right-side-up to vertical low-side-right
 						//Find the first occupied box
 						while (box[i][j] == false){
 							j++;
-							if (j == 9){
+							if (j == 10){
 								j = 0;
 								i++;
 							}
 						}
 						//Check availability
+						if (i == 18)
+							return false;
+						if (i == 19)
+							return false;
 						if (board[i][j - 1] == true)
 							return false;
 						if (board[i + 2][j - 1] == true)
@@ -453,6 +473,12 @@ public class Piece {
 								j = 0;
 								i++;
 							}
+						}
+						//If its behind a wall, try to move lright
+						if (j == 0){
+							if (moveRight() == false)
+								return false;
+							j = j + 1;
 						}
 						//Check availability
 						if (board[i][j - 1] == true)
@@ -479,6 +505,10 @@ public class Piece {
 							}
 						}
 						//Check availability
+						if (i == 18)
+							return false;
+						if (i == 19)
+							return false;
 						if (board[i + i][j + 2] == true)
 							return false;
 						if (board[i + 2][j + 2] == true)
@@ -497,6 +527,12 @@ public class Piece {
 								j = 0;
 								i++;
 							}
+						}
+						//If its behind a wall, try to move right
+						if (j == 0){
+							if (moveRight() == false)
+								return false;
+							j = j + 1;
 						}
 						//Check availability
 						if (board[i + 1][j - 1] == true)
@@ -548,9 +584,13 @@ public class Piece {
 								i++;
 							}
 						}
+						//If its behind a wall, try to move right
+						if (j == 0){
+							if (moveRight() == false)
+								return false;
+							j = j + 1;
+						}
 						//Check availability
-						if (j == 0)
-							return false;
 						if (board[i][j + 1] == true)
 							return false;
 						if (board[1 + 1][j - 1] == true)
@@ -592,9 +632,13 @@ public class Piece {
 								i++;
 							}
 						}
+						//If its behind a wall, try to move right
+						if (j == 0){
+							if (moveRight() == false)
+								return false;
+							j = j + 1;
+						}
 						//Check availability
-						if (j == 0)
-							return false;
 						if (board[i][j + 1] == true)
 							return false;
 						if (board[1 + 1][j - 1] == true)
@@ -636,14 +680,18 @@ public class Piece {
 						//Find the first occupied box
 						while (box[i][j] == false){
 							j++;
-							if (j == 9){
+							if (j == 10){
 								j = 0;
 								i++;
 							}
 						}
+						//If its behind a wall, try to move right
+						if (j == 1){
+							if (moveRight() == false)
+								return false;
+							j = j + 1;
+						}
 						//Check availability
-						if (j == 1)
-							return false;
 						if (board[i][j -2] == true)
 							return false;
 						if (board[1][j - 1] == true)
@@ -680,14 +728,18 @@ public class Piece {
 						//Find the first occupied box
 						while (box[i][j] == false){
 							j++;
-							if (j == 9){
+							if (j == 10){
 								j = 0;
 								i++;
 							}
 						}
+						//If its behind a wall, try to move right
+						if (j == 1){
+							if (moveRight() == false)
+								return false;
+							j = j + 1;
+						}
 						//Check availability
-						if (j == 1)
-							return false;
 						if (board[i][j -2] == true)
 							return false;
 						if (board[1][j - 1] == true)
@@ -730,9 +782,13 @@ public class Piece {
 								i++;
 							}
 						}
+						//If its behind a wall, try to move right
+						if (j == 0){
+							if (moveRight() == false)
+								return false;
+							j = j + 1;
+						}
 						//Check availability
-						if (j == 0)
-							return false;
 						if (board[i + 1][j - 1] == true)
 							return false;
 						//Perform transformation
@@ -766,9 +822,13 @@ public class Piece {
 								i++;
 							}
 						}
+						//If its behind a wall, try to move left
+						if (j == 9){
+							if (moveLeft() == false)
+								return false;
+							j = j - 1;
+						}
 						//Check availability
-						if (j == 9)
-							return false;
 						if (board[i + 1][j + 1] == true)
 							return false;
 						//Perform transformation

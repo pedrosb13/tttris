@@ -1,5 +1,14 @@
 TTTris changelog
 
+*****************************
+v0.6-alpha - 27 Jan 2012 
+-High scores can now be seen from start screen 
+-Fixed several bugs when rotating pieces
+-Fixes several bugs on game over
+-Added vibration on somo events
+-Implemented pause button
+******************************
+
 
 *****************************
 v0.5-alpha - 26 Jan 2012 
