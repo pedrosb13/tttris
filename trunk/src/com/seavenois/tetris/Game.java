@@ -139,7 +139,7 @@ public class Game extends Activity {
 	    btnRotateLeft.setOnClickListener(new OnClickListener(){
 	    	public void onClick(View v) {
 	    		unDraw();
-	    		//currentPiece.rotateLeft(); TODO 
+	    		currentPiece.rotateLeft();
 	    		vibrator.vibrate(30);
 	    		reDraw();
 			}
