@@ -1,1 +1,0 @@
-gcc -o test src/life.c -lm -lSDL_ttf -lm -lSDL_mixer -lm -lSDL_image -lSDL -I/usr/include/SDL -I/usr/local/include/SDL
