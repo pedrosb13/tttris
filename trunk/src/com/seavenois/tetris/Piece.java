@@ -1064,7 +1064,6 @@ public class Piece {
 						if (board[i + 1][j + 1] == true)
 							return false;
 						//Perform transformation
-						Log.e("e", "e");
 						box[i][j - 1] = true;
 						box[i + 1][j - 1] = true;
 						box[i + 1][j + 1] = true;
