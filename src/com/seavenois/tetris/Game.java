@@ -1,5 +1,8 @@
 package com.seavenois.tetris;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -252,6 +255,7 @@ public class Game extends Activity {
     //If there is something in the two first rows before starting a new piece, the game is loose
     private boolean gameLoose() {
     	int hScore1, hScore2, hScore3, aux;
+    	String hScore1Date, hScore2Date, hScore3Date, auxDate;
     	boolean loose = false;
 		for (int j = 0; j < 10; j++)
 			if (box[1][j].getColor() != Values.COLOR_NONE)
@@ -267,24 +271,39 @@ public class Game extends Activity {
 		hScore1 = highScores.getInt("hScore1", 0);
 		hScore2 = highScores.getInt("hScore2", 0);
 		hScore3 = highScores.getInt("hScore3", 0);
-		if(score > hScore3)
+		hScore1Date = highScores.getString("hScore1Date", "0");
+		hScore2Date = highScores.getString("hScore2Date", "0");
+		hScore3Date = highScores.getString("hScore3Date", "0");
+		Calendar currentDate = Calendar.getInstance();
+		Date dateNow = currentDate.getTime();
+		if(score > hScore3){
 			hScore3 = score;
+			hScore3Date = dateNow.toString();
+		}
 		if(hScore3 > hScore2){
 			aux = hScore2;
+			auxDate = hScore2Date;
 			hScore2 = hScore3;
+			hScore2Date = hScore3Date;
 			hScore3 = aux;
+			hScore3Date = auxDate;
 		}
 		if(hScore2 > hScore1){
 			aux = hScore1;
+			auxDate = hScore1Date;
 			hScore1 = hScore2;
+			hScore1Date = hScore2Date;
 			hScore2 = aux;
+			hScore2Date = auxDate;
 		}
 		SharedPreferences.Editor editor = highScores.edit();
 		editor.putInt("hScore1", hScore1);
 		editor.putInt("hScore2", hScore2);
 		editor.putInt("hScore3", hScore3);
+		editor.putString("hScore1Date", hScore1Date);
+		editor.putString("hScore2Date", hScore1Date);
+		editor.putString("hScore3Date", hScore1Date);
 		editor.commit();
-		Log.e("HS1", Integer.toString(highScores.getInt("hScore1", 2)));
 		return true;
 	}
 

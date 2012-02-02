@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/textViewHighScore1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center_vertical|center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceLarge" android:layout_weight=".3"/>
-
-    <TextView
-        android:id="@+id/textViewHighScore2"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center_vertical|center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium" android:layout_weight=".3"/>
-
-    <TextView
-        android:id="@+id/textViewHighScore3"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center_vertical|center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceSmall" android:layout_weight=".3"/>
-
+	<LinearLayout 
+		android:id="@+id/LinearLayoutHihScore1"
+		android:layout_weight=".3"
+		android gravity="center_vertical|center_horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:orientation="vertical">
+		<TextView android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="fill_parent" android:id="@+id/textViewHighScore1" android:gravity="center_vertical|center_horizontal" android:text="score" android:layout_height="fill_parent" android:layout_weight=".3"></TextView>
+		<TextView android:gravity="center_vertical|center_horizontal" android:id="@+id/TextViewHighScore1" android:text="date" android:layout_weight=".7" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+	</LinearLayout>
+	<LinearLayout 
+		android:id="@+id/LinearLayoutHihScore2"
+		android:layout_weight=".3"
+		android gravity="center_vertical|center_horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:orientation="vertical">
+	    <TextView
+	        android:id="@+id/textViewHighScore2"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:gravity="center_vertical|center_horizontal"
+	        android:textAppearance="?android:attr/textAppearanceMedium"/>
+	</LinearLayout>
+	<LinearLayout 
+		android:id="@+id/LinearLayoutHihScore3"
+		android:layout_weight=".3"
+		android gravity="center_vertical|center_horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:orientation="vertical">
+	    <TextView
+	        android:id="@+id/textViewHighScore3"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:gravity="center_vertical|center_horizontal"
+	        android:textAppearance="?android:attr/textAppearanceSmall"/>
+	</LinearLayout>
 </LinearLayout>
