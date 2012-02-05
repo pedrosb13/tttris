@@ -19,7 +19,7 @@
         <activity
             android:name=".HighScores"
             android:label="@string/app_name" 
-            android:screenOrientation="portrait"                      
+            android:screenOrientation="portrait">                  
         </activity>        
         <activity 
             android:name=".Game" 
@@ -31,8 +31,8 @@
         </activity>
         <activity 
             android:name=".Changelog" 
-            android:screenOrientation="portrait">
-            android:label="@string/app_name" 
+            android:screenOrientation="portrait"
+            android:label="@string/changelog" >
         </activity>        
     </application>
 </manifest>

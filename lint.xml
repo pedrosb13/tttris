@@ -3,4 +3,7 @@
     <issue id="NestedWeights" severity="ignore">
         <ignore path="res/layout/game.xml" />
     </issue>
+    <issue id="UselessParent">
+        <ignore path="res/layout/changelog.xml" />
+    </issue>
 </lint>
