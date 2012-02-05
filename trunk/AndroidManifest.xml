@@ -33,6 +33,7 @@
             android:name=".Changelog" 
             android:screenOrientation="portrait"
             android:label="@string/changelog" >
-        </activity>        
+        </activity>
+        <activity android:name=".Preferences" android:screenOrientation="portrait"></activity>        
     </application>
 </manifest>

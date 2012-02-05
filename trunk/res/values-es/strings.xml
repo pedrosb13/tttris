@@ -21,4 +21,19 @@
     <string name="donate1">Probablemente no deberias. Seguramente este juego no te ha parecido muy emocionante, o quizas hayas pensado, "Oh, es una buena idea, pero aun le queda mucho camino por delante". Una pequeña donacion es un buen incentivo para ir recorriendo ese camino. He invertido muchas horas en esto, y me quedan muchas mas por invertir, y me gustaria que fuera lo bastante rentable para tomarme un par de tazas de cafe</string>
     <string name="donate2">Gracias!</string>
     <string name="changelog">"Changelog"</string>
+    <string name="preferencesSound">Sonido</string>
+    <string name="preferencesSoundFX">Efectos de sonido</string>
+    <string name="preferencesSoundFXEnabled">Efectos activados</string>
+    <string name="preferencesSoundFXDisabled">Efectos desactivados</string>
+    <string name="preferencesSoundMusic">Musica</string>
+    <string name="preferencesSoundMusicEnabled">Musica activada</string>
+    <string name="preferencesSoundMusicDisabled">Musica desactivada</string>
+    <string name="preferencesGame">Juego</string>
+    <string name="preferencesGameBackgrounds">Imagenes de fondo</string>
+    <string name="preferencesGameBackgroundsChecked">Mostras</string>
+    <string name="preferencesGameBackgroundsUnchecked">No mostrar</string>
+    <string name="preferencesScreen">Pantalla</string>	
+    <string name="preferencesScreenKeepOn">Mantener encendida</string>
+    <string name="preferencesScreenKeepOnChecked">Mantener</string>
+    <string name="preferencesScreenKeepOnUnchecked">Apagar normalmente</string>
 </resources>
