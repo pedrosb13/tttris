@@ -2,14 +2,12 @@ package com.seavenois.tetris;
 
 import java.util.Calendar;
 import java.util.Date;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,7 +32,7 @@ public class Game extends Activity {
 	ImageView nextPieceImg;
 	//Score and combo
 	TextView textScore;
-	ImageView imageCombo; //TODO: add to the layout
+	ImageView imageCombo;
 	int score = 0;
 	int combo = 1;
 	Vibrator vibrator;
@@ -266,7 +264,7 @@ public class Game extends Activity {
 		//Notify the user TODO: (Maybe deactivate buttons?)
 		game = false;
 		vibrator.vibrate(1000);
-		//Add high scores if needed TODO: Consider if adding dates
+		//Add high scores if needed
 		SharedPreferences highScores = getSharedPreferences("highScores", 0);
 		hScore1 = highScores.getInt("hScore1", 0);
 		hScore2 = highScores.getInt("hScore2", 0);

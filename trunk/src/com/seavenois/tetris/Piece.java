@@ -2,8 +2,6 @@ package com.seavenois.tetris;
 
 import java.util.Random;
 
-import android.util.Log;
-
 public class Piece {
 	
 	Random generator;
@@ -21,7 +19,7 @@ public class Piece {
 	Piece(){
 		generator = new Random();
 		type = (byte) generator.nextInt(7);
-		type = 2;//TESTING, change to be all the same piece 
+		//type = 2;//TESTING, change to be all the same piece 
 		color = (byte) (type + 1);
 		rotation = 0;
 		box = new boolean[20][10];
@@ -847,7 +845,6 @@ public class Piece {
 		return true;
 	}
 	
-	//TODO: TEST!
 	public boolean rotateLeft(){
 		int i = 0;
 		int j = 0;
@@ -1041,7 +1038,6 @@ public class Piece {
 						box[i + 1][j + 1] = false;
 						break;
 					case 0: //From vertical top-side-right to horizontal left-side-up
-						//TODO: It doesnt work. I dont know why
 						//Find the first occupied box
 						while (box[i][j] == false){
 							j++;
@@ -1070,6 +1066,7 @@ public class Piece {
 						box[i][j] = false;
 						box[i][j + 1] = false;
 						box[i + 2][j] = false;
+						break;
 					case 1: //From horizontal right-side-down to vertical low-side-right
 						//Find the first occupied box
 						while (box[i][j] == false){
@@ -1124,7 +1121,7 @@ public class Piece {
 				break;
 			case Values.PIECE_2:
 				//Switch new rotation state
-				switch (rotation + 1){
+				switch (rotation - 1){
 					case -1: //From horizontal right-side-up to vertical top-side-left
 						//Find the first occupied box
 						while (box[i][j] == false){
@@ -1146,8 +1143,8 @@ public class Piece {
 						//Perform transformation
 						box[i][j - 1] = true;
 						box[i + 2][j] = true;
+						box[i + 1][j - 1] = false;
 						box[i + 1][j - 2] = false;
-						box[i + 1][j + 1] = false;
 						break;
 					case 0: //From vertical bottom-side-right to horizontal right-side-up
 						//Find the first occupied box
@@ -1172,7 +1169,7 @@ public class Piece {
 						if (board[i + 1][j - 1] == true)
 							return false;
 						//Perform transformation
-						box[i][j - + 1] = true;
+						box[i][j + 1] = true;
 						box[i + 1][j + 1] = true;
 						box[i + 1][j - 1] = true;
 						box[i][j] = false;
@@ -1477,10 +1474,10 @@ public class Piece {
 							j = j + 1;
 						}
 						//Check availability
-						if (board[i - 1][j - 1] == true)
+						if (board[i + 1][j - 1] == true)
 							return false;
 						//Perform transformation
-						box[i - 1][j - 1] = true;
+						box[i + 1][j - 1] = true;
 						box[i + 2][j] = false;
 						break;
 					case 1: //From bottom faced to left faced
