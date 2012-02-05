@@ -22,4 +22,19 @@
     <string name="donate1">Probably you should not. Surely this game doesnt seem very exciting, or maybe you thought, "Oh, it's a good idea, but still has a long way to go." A small donation is a good incentive to go down that road. I have spent many hours on this, and I have so many more to invest, and I would like it to be profitable enough to take a couple of cups of coffee</string>
     <string name="donate2">Thank you!</string>
     <string name="changelog">"Changelog"</string>
+    <string name="preferencesSound">Sound</string>
+    <string name="preferencesSoundFX">FX sounds</string>
+    <string name="preferencesSoundFXEnabled">Sound efects enabled</string>
+    <string name="preferencesSoundFXDisabled">Sound efects disabled</string>
+    <string name="preferencesSoundMusic">Music</string>
+    <string name="preferencesSoundMusicEnabled">Music enabled</string>
+    <string name="preferencesSoundMusicDisabled">Music disabled</string>
+    <string name="preferencesGame">Game</string>
+    <string name="preferencesGameBackgrounds">Show board gackground</string>
+    <string name="preferencesGameBackgroundsChecked">Show</string>
+    <string name="preferencesGameBackgroundsUnchecked">Dont show</string>
+    <string name="preferencesScreen">Screen</string>	
+    <string name="preferencesScreenKeepOn">Keep on</string>
+    <string name="preferencesScreenKeepOnChecked">Screen will not lock</string>
+    <string name="preferencesScreenKeepOnUnchecked">Screen will lock as usually</string>
 </resources>
