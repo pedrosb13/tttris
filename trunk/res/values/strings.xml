@@ -15,5 +15,11 @@
 	<string name="first">"1st"</string>
 	<string name="second">"2nd"</string>
 	<string name="third">"3rd"</string>
-	
+	<string name="viewChangelog">"View Changelog"</string>
+	<string name="donate">"Donate"</string>
+	<string name="preferences">"Preferences"</string>
+	<string name="donateWhy">Why should I donate?</string>
+    <string name="donate1">Probably you should not. Surely this game doesnt seem very exciting, or maybe you thought, "Oh, it's a good idea, but still has a long way to go." A small donation is a good incentive to go down that road. I have spent many hours on this, and I have so many more to invest, and I would like it to be profitable enough to take a couple of cups of coffee</string>
+    <string name="donate2">Thank you!</string>
+    <string name="changelog">"Changelog"</string>
 </resources>

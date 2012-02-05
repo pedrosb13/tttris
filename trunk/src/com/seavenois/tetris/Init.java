@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -36,7 +39,7 @@ public class Init extends Activity {
         	public void onClick(View v) {
         		Intent intent = new Intent();
         		intent.setComponent(new ComponentName("com.seavenois.tetris", "com.seavenois.tetris.Game"));
-        		//TODO: Something to load a game. First I need to develop something to load the game
+        		//TODO: Something to load a game. First I need to develop something to save the game
         		startActivity(intent);
 			}
         });
@@ -47,7 +50,33 @@ public class Init extends Activity {
         		intent.setComponent(new ComponentName("com.seavenois.tetris", "com.seavenois.tetris.HighScores"));
         		startActivity(intent);
 			}
-        });
-        
+        });      
+    }
+	//Set menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.initmenu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent;
+        intent = new Intent();
+		switch(item.getItemId()){
+                case R.id.menuItemChangelog:
+                        intent.setComponent(new ComponentName("com.seavenois.tetris", "com.seavenois.tetris.Changelog"));
+                        break;
+                case R.id.menuItemPreferences:
+                        intent.setComponent(new ComponentName("com.seavenois.tetris", "com.seavenois.tetris.Preferences"));
+                        break;
+                case R.id.menuItemDonate:
+                		intent.setComponent(new ComponentName("com.seavenois.tetris", "com.seavenois.tetris.Donate"));
+                        break;
+        }
+		startActivity(intent);
+        return true;
     }
 }
