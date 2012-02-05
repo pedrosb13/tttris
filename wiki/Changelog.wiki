@@ -1,8 +1,17 @@
 #summary Application chagelog
 
+||v0.8-beta || 05 Feb 2012 ||
+
+  * Lots of fixes when rotating pieces left.
+  * High scores are now saved with date.
+  * Samall UI changes.
+  * Minor bugs fixed.
+  * Aplication labelad as _beta_.
+
+
 ||v0.7-alpha || 27 Jan 2012 ||
 
-  * Pieces can be rotated to the left (Unstable, needs testing)
+  * Pieces can be rotated to the left (Unstable, needs testing).
 
 
 ||v0.6-alpha || 27 Jan 2012 ||
