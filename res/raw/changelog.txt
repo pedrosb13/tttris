@@ -1,7 +1,7 @@
 TTTris changelog
 
 *****************************
-v0.7-alpha - 27 Jan 2012 
+v0.8-beta - 05 Feb 2012 
 -Lots of fixes when rotating pieces left
 -High scores are now saved with date
 -Samall UI changes

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/menuItemChangelog" android:title="@string/viewChangelog"></item>
+    <item android:id="@+id/menuItemPreferences" android:title="@string/preferences"></item>
+    <item android:id="@+id/menuItemDonate" android:title="@string/donate"></item>
+</menu>
