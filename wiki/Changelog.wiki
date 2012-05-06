@@ -1,5 +1,10 @@
 #summary Application chagelog
 
+||v0.8.1-beta || 06 May 2012 ||
+
+  * "Game Over" dialog.
+  * Minor code improvements and lots of comments.
+
 ||v0.8-beta || 05 Feb 2012 ||
 
   * Lots of fixes when rotating pieces left.
