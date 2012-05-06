@@ -7,26 +7,46 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
-//The game board
+/*************************************************/
+/* The game board ********************************/
+/*************************************************/
 public class BoardView extends View{
-
+	
+	//Drawables for the board boxes, the playable zone
 	public Drawable[][] block = new Drawable[20][10];
+	//Drawables for the wall (yes, it's done with tiles)
 	public Drawable[] wall = new Drawable[102];
+	//Context and canvas to be used along the class
 	Context context;
 	Canvas c;
 	
+	/*************************************************/
+	/* Class constructor *****************************/
+	/*************************************************/
+	/* Defines the context and the canvas ************/
+	/*************************************************/
 	public BoardView(Context cont, AttributeSet attrs) {
 		super(cont, attrs);
 		context = cont;
 	}
 	
-	//Defines a position in the board for a box
+	/*************************************************/
+	/* Initializes drawables for playable boxes ******/
+	/*************************************************/
+	/* Must be initialized one by one from the Game **/
+	/* activity, passing all the parameters **********/
+	/*************************************************/
 	public void initialize(int i, int j, int left, int top, int side){
 		block[i][j] = context.getResources().getDrawable(R.drawable.alpha);
         block[i][j].setBounds(left, top, left + side, top + side);
 	}
 	
-	//A method to draw the walls. Needs the top and the left of the first box and the side of each box
+	/*************************************************/
+	/* Draws the board wall **************************/
+	/*************************************************/
+	/* Needs the top-left point of the board frame ***/
+	/* and the width of the wall *********************/
+	/*************************************************/
 	public void createWall(int left, int top, int side){
 		int i = 0, x, y;
 		x = left - side / 2;
@@ -57,6 +77,11 @@ public class BoardView extends View{
 		}		
 	}
 	
+	/*************************************************/
+	/* Draws the board *******************************/
+	/*************************************************/
+	/* Draws the walls and all the boxes *************/
+	/*************************************************/
 	@Override
     protected void onDraw(Canvas canvas) {
 		c = canvas;
@@ -65,17 +90,25 @@ public class BoardView extends View{
         	wall[i].draw(c);
         for (int i = 0; i < 20; i++)
         	for (int j = 0; j < 10; j++){
-        		//Log.e("i, j", Integer.toString(i) + ", " + Integer.toString(j));
         		block[i][j].draw(canvas);
         	}
+        //Actually draw
         invalidate();
     }
 	
+	/*************************************************/
+	/* Canvas getter *********************************/
+	/*************************************************/
 	public Canvas getCanvas(){
         return c;
 	}
 	
-	//Color a box (coordinates [i][j]
+	/*************************************************/
+	/* Colors a box **********************************/
+	/*************************************************/
+	/* Changes the drawable for the indicated box to */
+	/* to 'c'. Can also be COLOR_NONE to undraw ******/
+	/*************************************************/
 	public void setColor(int i, int j, byte c){
 		Rect rect;
 		rect = block[i][j].getBounds();

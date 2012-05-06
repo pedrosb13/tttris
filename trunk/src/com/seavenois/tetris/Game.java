@@ -3,7 +3,9 @@ package com.seavenois.tetris;
 import java.util.Calendar;
 import java.util.Date;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -15,7 +17,11 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+/*************************************************/
+/* Main game activity ****************************/
+/*************************************************/
 public class Game extends Activity {
 	
 	BoardView gameBoard;
@@ -39,7 +45,13 @@ public class Game extends Activity {
 	//The pause indicator
 	boolean game;
 	
-    /** Called when the activity is first created. */    
+    /*************************************************/
+	/* On activity creation **************************/
+	/*************************************************/
+	/* Initializes variables, ui elements, and *******/
+	/* starts the game *******************************/
+	/* See inline comments for more details **********/
+	/*************************************************/
 	@Override
     public void onCreate(Bundle savedInstanceState) {
     	//Assign layouts
@@ -190,15 +202,23 @@ public class Game extends Activity {
 		}
     }
     
-    //The time bucle
+	/*************************************************/
+	/* Main time bucle *******************************/
+	/*************************************************/
+	/* Checks the game state (ongoing, paused, *******/ 
+	/* ended... On each bucle, it tries to move the **/
+	/* current piece down. If its imposible, it ******/
+	/* checks for filled rows, updates the combo flag /
+	/* if necessary, and check if the game is loose, */
+	/* otherwise it initiates a new piece ************/
+	/*************************************************/
     public void gameAction(){
     	if (game == true){
 	    	//Undraw the current piece
 	    	unDraw();
-	    	
-	    	//Try to move down.
+	    	//Try to move it down.
 			if (currentPiece.moveDown() == false){
-				//If couldnt move fix the blocks currently occupied...
+				//If couldnt move the piece down, the boxes occupied by it become ocuupied boxes
 				for (int i = 0; i < 20; i++)
 		        	for (int j = 0; j < 10; j++){
 		        		if (currentPiece.box[i][j] == true){
@@ -212,13 +232,11 @@ public class Game extends Activity {
 					imageCombo.setImageResource(R.drawable.alpha);
 				}
 				//... check if the game is loose... 
-				if (gameLoose() == true)
-					finish();
+				checkGameLoose();
 				// ... and start a new piece
 				currentPiece = nextPiece;
 				currentPiece.start();
 				nextPiece = new Piece();
-				
 				//Set the next piece image
 				switch(nextPiece.type){
 					case Values.PIECE_0:
@@ -250,8 +268,21 @@ public class Game extends Activity {
     	}
     }
     
-    //If there is something in the two first rows before starting a new piece, the game is loose
-    private boolean gameLoose() {
+    /*************************************************/
+	/* Checks if the current game is loose************/
+	/*************************************************/
+	/* Checks if there is something in the first two */ 
+	/* rows of the board. If there is something, *****/
+	/* the game is loose. Score is checked for *******/
+	/* highscores and those are updated if necessary */
+	/* A dialog is shown to the user where the score */
+	/* and a trophy (if highscore) are shown, and ****/
+    /* asking to choose between exiting or sharing ***/
+    /* the score with an external app. On exit, the **/
+    /* activity is finished and you return to the ****/
+    /* main menu *************************************/
+	/*************************************************/
+    private void checkGameLoose() {
     	int hScore1, hScore2, hScore3, aux;
     	String hScore1Date, hScore2Date, hScore3Date, auxDate;
     	boolean loose = false;
@@ -259,10 +290,11 @@ public class Game extends Activity {
 			if (box[1][j].getColor() != Values.COLOR_NONE)
 				loose = true;
 		if (loose == false)
-			return false;
-		//What to do on game over?
-		//Notify the user TODO: (Maybe deactivate buttons?)
+			return;
+		//If I get here, the game is loose. Game state variable is set to false
 		game = false;
+		//Vibrate if vibration is active in prefenrences
+		//TODO: See line above
 		vibrator.vibrate(1000);
 		//Add high scores if needed
 		SharedPreferences highScores = getSharedPreferences("highScores", 0);
@@ -302,10 +334,41 @@ public class Game extends Activity {
 		editor.putString("hScore2Date", hScore1Date);
 		editor.putString("hScore3Date", hScore1Date);
 		editor.commit();
-		return true;
+		//Show dialog showing score
+		//TODO:Show a trophy icon if high score
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.gameover);
+		builder.setMessage(R.string.score)
+		       .setCancelable(false)
+		       //A button to just quit. Finishes the activity, so the user returns to the main menu
+		       .setNegativeButton(R.string.exit, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		                dialog.cancel();
+		                finish();
+		           }
+		       })
+		       //A button to just share score with an external app
+		       .setPositiveButton(R.string.shareScore, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		        	   //TODO: Implement this. Check if a finish() is necesary
+		        	   Toast toast = Toast.makeText(getBaseContext(), R.string.notImplemented, Toast.LENGTH_LONG);
+		        	   toast.show();
+		           }
+		       });
+		AlertDialog endGameAlert = builder.create();
+		endGameAlert.show();
 	}
 
-	//Look for complete rows
+    /*************************************************/
+	/* Checks for filled rows ***********/
+	/*************************************************/
+	/* Check if some row is filled. If there is some */
+	/* it calls to removeRow(), that will remove the */
+    /* row and increase score. ***********************/
+	/* This function returns a boolean indicating if */
+	/* something has been removed, to keep track of  */
+	/* the combo multiplier. *************************/
+	/*************************************************/
     public boolean lookForRows(){
     	boolean somethingRemoved = false; //To determine if some row has been removed to keep the combo
     	boolean full = true;
@@ -317,6 +380,7 @@ public class Game extends Activity {
     		}
     		if (full == true){
     			somethingRemoved = true;
+    			//Remove the row. The score is increase here
     			removeRow(i);
     		}
     	}
@@ -324,7 +388,15 @@ public class Game extends Activity {
     }
     
     
-    //Remove row and score
+    /*************************************************/
+	/* Removes the row passed as argument ************/
+	/*************************************************/
+	/* First increases the score according to the ****/
+	/* combo multiplier. Then doubles the combo ******/
+    /* multiplier (never higher than 16). Finally it */
+	/* moves all the rows above the removed one one **/
+	/* position down. ********************************/
+	/*************************************************/
     public void removeRow(int row){
     	score = score + Values.SCORE_PER_ROW * combo;
     	textScore.setText(Integer.toString(score));
@@ -352,7 +424,13 @@ public class Game extends Activity {
     			gameBoard.setColor(i, j, (byte) box[i - 1][j].getColor());
     		}
     }
-    //Redraw the screen
+    
+    /*************************************************/
+	/* Draws the piece being played ******************/
+	/*************************************************/
+	/* Draws cubes in the positions occupied by the **/
+	/* current piece. Should be called after undraw() /
+	/*************************************************/
     public void reDraw(){
     	//Read where the piece is and colorize
     	for (int i = 0; i < 20; i++)
@@ -364,7 +442,12 @@ public class Game extends Activity {
         	}
     }
     
-    //Undraw the current piece before moving
+    /*************************************************/
+	/* Clears the piece being played *****************/
+	/*************************************************/
+	/* Clears cubes in the positions occupied by the */
+	/* current piece. Should be called befors draw() */
+	/*************************************************/
     public void unDraw(){
     	for (int i = 0; i < 20; i++)
         	for (int j = 0; j < 10; j++){

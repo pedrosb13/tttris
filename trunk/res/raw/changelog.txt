@@ -1,6 +1,12 @@
 TTTris changelog
 
 *****************************
+v0.8.1-beta - 06 May 2012 
+-A dialog message is shown when the game is lost
+-Code improvements: Some this are cleaner now, and lots of comments
+******************************
+
+*****************************
 v0.8-beta - 05 Feb 2012 
 -Lots of fixes when rotating pieces left
 -High scores are now saved with date

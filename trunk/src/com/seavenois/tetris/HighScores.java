@@ -6,12 +6,26 @@ import android.os.Bundle;
 import android.view.Window;
 import android.widget.TextView;
 
+/*************************************************/
+/* High scores activity **************************/
+/*************************************************/
+/* Displays the 3 best scores, with date, and a **/
+/* button to clear them **************************/
+/*************************************************/
+//TODO: Implement a clear button
 public class HighScores extends Activity{
-
+	
+	/*************************************************/
+	/* On create *************************************/
+	/*************************************************/
+	/* Sets the text views and writes the values *****/
+	/*************************************************/
 	public void onCreate(Bundle savedInstanceState) {
 		
-		//TextViews
-		TextView hs1, hs2, hs3, hs1d, hs2d, hs3d;
+		//TextViews for the scores
+		TextView hs1, hs2, hs3;
+		//TextViews for the dates
+		TextView hs1d, hs2d, hs3d;
 		
 		//Saved values
 		SharedPreferences highScores;
@@ -29,11 +43,15 @@ public class HighScores extends Activity{
         hs2d = (TextView) findViewById(R.id.textViewHighScore2Date);
         hs3d = (TextView) findViewById(R.id.textViewHighScore3Date);
         
-        //Load high scores
+        //Load high scores. Only write if they exist
+        //If none exists, display "No high scores"
         highScores = getSharedPreferences("highScores", 0);
 		if (highScores.getInt("hScore1", 0) > 0){
 			hs1.setText(getResources().getString(R.string.first) + ": " + Integer.toString(highScores.getInt("hScore1", 0)));
 			hs1d.setText(highScores.getString("hScore1Date", " "));
+		}
+		else{
+			hs1d.setText(getResources().getString(R.string.nohscores));
 		}
 		if (highScores.getInt("hScore2", 0) > 0){
 			hs2.setText(getResources().getString(R.string.second) + ": " + Integer.toString(highScores.getInt("hScore2", 0)));

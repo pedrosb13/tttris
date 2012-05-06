@@ -8,8 +8,20 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+/*************************************************/
+/* Simply shows the changelog ********************/
+/*************************************************/
 public class Changelog extends Activity{
+	
+	//The text view where all the changelog will be shown
 	TextView textView;
+	
+	/*************************************************/
+	/* On create *************************************/
+	/*************************************************/
+	/* Defines the textView and calls a function to **/
+	/* fill it ***************************************/
+	/*************************************************/
 	public void onCreate(Bundle savedInstanceState) { 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.changelog); 
@@ -17,6 +29,12 @@ public class Changelog extends Activity{
         textView.setText(readTxt());
     }
 	
+	/*************************************************/
+	/* Fills the text ********************************/
+	/*************************************************/
+	/* Reads and returns the text in the changelog ***/
+	/* file ******************************************/
+	/*************************************************/
 	private String readTxt(){
 	     InputStream inputStream = getResources().openRawResource(R.raw.changelog);	     
 	     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();	     
