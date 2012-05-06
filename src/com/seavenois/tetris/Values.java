@@ -1,5 +1,8 @@
 package com.seavenois.tetris;
 
+/*************************************************/
+/* Static values to be used among the game *******/
+/*************************************************/
 public final class Values {
 	
 	//Score codes
@@ -15,7 +18,7 @@ public final class Values {
 	public static final byte COLOR_PURPLE = 6;
 	public static final byte COLOR_WHITE = 7;
 	
-	//Piece codes
+	//Piece codes. The "ascii art" will tell you which piece do the codes represent
 	//0000
 	//0000
 	//1111

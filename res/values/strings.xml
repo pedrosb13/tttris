@@ -2,6 +2,9 @@
 <resources>
 
     <string name="app_name">Tttris</string>
+    <string name="notImplemented">Not Implemented Yet</string>
+    <string name="exit">Exit</string>
+    <string name="shareScore">Share score</string>
     <string name="next">Next:</string>
     <string name="score">Score:</string>
     <string name="newGame">New game</string>
@@ -9,12 +12,14 @@
     <string name="highScores">High Scores</string>
 	<string name="pause">\nPause\n</string>
 	<string name="resume">\nResume\n</string>
+	<string name="gameover">Game over</string>	
 	<string name="accesibilityLogo">"Logo"</string>
 	<string name="accesibilityCombo">"Combo"</string>
 	<string name="accesibilityNextPiece">"Next Piece"</string>
 	<string name="first">"1st"</string>
 	<string name="second">"2nd"</string>
 	<string name="third">"3rd"</string>
+	<string name="nohscores">"No scores"</string>
 	<string name="viewChangelog">"View Changelog"</string>
 	<string name="donate">"Donate"</string>
 	<string name="preferences">"Preferences"</string>

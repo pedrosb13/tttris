@@ -12,11 +12,19 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 
+/*************************************************/
+/* Main menu activity ****************************/
+/*************************************************/
 public class Init extends Activity {
 	
+	//Buttons
 	private Button btnNewGame, btnResumeGame, btnHighScores;
 	
-    /** Called when the activity is first created. */    
+	/*************************************************/
+	/* On create *************************************/
+	/*************************************************/
+	/* Sets ui elements ******************************/
+	/*************************************************/ 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
     	//Assign layouts
@@ -52,7 +60,10 @@ public class Init extends Activity {
 			}
         });      
     }
-	//Set menu
+	
+	/*************************************************/
+	/* Create the options menu ***********************/
+	/*************************************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);
@@ -61,6 +72,9 @@ public class Init extends Activity {
         return true;
     }
     
+    /*************************************************/
+	/* Set actions for each menu element *************/
+	/*************************************************/
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         Intent intent;

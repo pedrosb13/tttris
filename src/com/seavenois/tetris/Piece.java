@@ -2,20 +2,41 @@ package com.seavenois.tetris;
 
 import java.util.Random;
 
+/*************************************************/
+/* A piece is a set of boxes. There are 7 ********/
+/*************************************************/
 public class Piece {
 	
+	//Random generator to select next piece
 	Random generator;
+	
+	//The type of the piece, the shape.
 	byte type;
+	
+	//The color of the piece. It depends on the type
 	byte color;
+	
+	//Array of boxes occupied by the piece
 	boolean[][] box;
+	
+	//Array of the boxes in board occupied in the game board
 	boolean board[][];
 	boolean[][] aux;
-	byte rotation;	//Rotation state of the piece: 0->1->2->3->0
 	
+	//Rotation state of the piece: 0->1->2->3->0
+	byte rotation;
+	
+	//Color getter
 	public byte getColor(){
 		return color;
 	}
 	
+	/*************************************************/
+	/* Class constructor *****************************/
+	/*************************************************/
+	/* Sets a random type for the piece, sets the ****/
+	/* color and gives it a null position ************/
+	/*************************************************/
 	Piece(){
 		generator = new Random();
 		type = (byte) generator.nextInt(7);
@@ -29,7 +50,9 @@ public class Piece {
         		box[i][j] = false;
 	}
 	
-	//Puts the piece in the top of the board
+	/*************************************************/
+	/* Puts the piece on top of the board ************/
+	/*************************************************/
 	public void start(){
 		switch (type){
 			//In the Values class there is a "graphical description" of each piece
@@ -78,9 +101,14 @@ public class Piece {
 		}
 	}
 	
-	
-	//This method receives the array of boxes from the Game class, so the piece have info about the state of the board
-	//Probably there is a better way to do that
+	/*************************************************/
+	/* This method receives the array of boxes from **/
+	/* the Game class, so the piece have info about **/
+	/* the state of the whole board. *****************/
+	/*************************************************/
+	/* I'm pretty sure there is a better way to do ***/
+	/* this. *****************************************/
+	/*************************************************/
 	public void readBoard(Box a[][]){
 		for (int i = 0; i < 20; i++)
         	for (int j = 0; j < 10; j++)

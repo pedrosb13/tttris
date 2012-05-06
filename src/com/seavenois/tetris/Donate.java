@@ -10,8 +10,20 @@ import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 
+/*************************************************/
+/* Ask the user for a donation *******************/
+/*************************************************/
+/* Contains a Paypal button and a short note *****/
+/*************************************************/
 public class Donate extends Activity{
         WebView webview;
+        
+        /*************************************************/
+    	/* On create *************************************/
+    	/*************************************************/
+    	/* Sets the PayPal button. The test is set from **/
+    	/* the layout. ***********************************/
+    	/*************************************************/
         @Override 
         public void onCreate(Bundle savedInstanceState) { 
                 super.onCreate(savedInstanceState); 
