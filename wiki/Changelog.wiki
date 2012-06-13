@@ -1,9 +1,21 @@
 #summary Application chagelog
 
+||v0.9-beta || 13 Jun 2012 || 
+
+  * Added 19 backgrounds
+  * Added "Vibration" and "About backgrounds" preferences
+  * Vibration and backgrounds preferences are now honored
+  * Fixed a bug because of what score was not displayed
+  * Now you can share your score with your friends
+  * Fixed a couple of orthographic errors
+  * Code improvements for future releases
+
+
 ||v0.8.1-beta || 06 May 2012 ||
 
   * "Game Over" dialog.
   * Minor code improvements and lots of comments.
+
 
 ||v0.8-beta || 05 Feb 2012 ||
 
