@@ -34,11 +34,18 @@
     <string name="preferencesSoundMusicEnabled">Musica activada</string>
     <string name="preferencesSoundMusicDisabled">Musica desactivada</string>
     <string name="preferencesGame">Juego</string>
+    <string name="preferencesGameVibration">Vibracion</string>
+    <string name="preferencesGameVibrationChecked">Vibrar</string>
+    <string name="preferencesGameVibrationUnchecked">No vibrar</string>
     <string name="preferencesGameBackgrounds">Imagenes de fondo</string>
     <string name="preferencesGameBackgroundsChecked">Mostras</string>
     <string name="preferencesGameBackgroundsUnchecked">No mostrar</string>
+    <string name="preferencesGameAboutBackgrounds">Sobre los fondos</string>
     <string name="preferencesScreen">Pantalla</string>	
     <string name="preferencesScreenKeepOn">Mantener encendida</string>
     <string name="preferencesScreenKeepOnChecked">Mantener</string>
     <string name="preferencesScreenKeepOnUnchecked">Apagar normalmente</string>
+    <string name="shareScoreSelector">Compartir usando#8230;</string>
+    <string name="shareScore1">Acabo de hacer </string>
+    <string name="shareScore2"> puntos jugando a Tttris! \n\nPruebalo:\n\n[link]</string>
 </resources>

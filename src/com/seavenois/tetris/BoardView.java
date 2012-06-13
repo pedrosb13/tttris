@@ -16,6 +16,9 @@ public class BoardView extends View{
 	public Drawable[][] block = new Drawable[20][10];
 	//Drawables for the wall (yes, it's done with tiles)
 	public Drawable[] wall = new Drawable[102];
+	//Drawable for the background, and boolean for drawing it or not
+	Drawable mbg;
+	boolean bg = false;
 	//Context and canvas to be used along the class
 	Context context;
 	Canvas c;
@@ -74,18 +77,91 @@ public class BoardView extends View{
 			wall[i].setBounds(x, y, x + side / 2, y + side / 2);
 			x = x + side / 2;
 			i = i + 1;
-		}		
+		}
+	}
+	/*************************************************/
+	/* Draws the board background ********************/
+	/*************************************************/
+	/* Needs the top-left point of the board frame ***/
+	/* and the width of the wall *********************/
+	/*************************************************/
+	public void createBg(int left, int top, int side){
+		//Set board background (if any)
+		bg = false;
+        int bgn = 1 + (int)(Math.random()*19);
+        switch (bgn){
+        	case 1:
+        		mbg = getResources().getDrawable(R.drawable.bg1);
+        		break;
+        	case 2:
+        		mbg = getResources().getDrawable(R.drawable.bg2);
+        		break;
+        	case 3:
+        		mbg = getResources().getDrawable(R.drawable.bg3);
+        		break;
+        	case 4:
+        		mbg = getResources().getDrawable(R.drawable.bg4);
+        		break;
+        	case 5:
+        		mbg = getResources().getDrawable(R.drawable.bg5);
+        		break;
+        	case 6:
+        		mbg = getResources().getDrawable(R.drawable.bg6);
+        		break;
+        	case 7:
+        		mbg = getResources().getDrawable(R.drawable.bg7);
+        		break;
+        	case 8:
+        		mbg = getResources().getDrawable(R.drawable.bg8);
+        		break;
+        	case 9:
+        		mbg = getResources().getDrawable(R.drawable.bg9);
+        		break;
+        	case 10:
+        		mbg = getResources().getDrawable(R.drawable.bg11);
+        		break;
+        	case 11:
+        		mbg = getResources().getDrawable(R.drawable.bg11);
+        		break;
+        	case 12:
+        		mbg = getResources().getDrawable(R.drawable.bg12);
+        		break;
+        	case 13:
+        		mbg = getResources().getDrawable(R.drawable.bg13);
+        		break;
+        	case 14:
+        		mbg = getResources().getDrawable(R.drawable.bg14);
+        		break;
+        	case 15:
+        		mbg = getResources().getDrawable(R.drawable.bg15);
+        		break;
+        	case 16:
+        		mbg = getResources().getDrawable(R.drawable.bg16);
+        		break;
+        	case 17:
+        		mbg = getResources().getDrawable(R.drawable.bg17);
+        		break;
+        	case 18:
+        		mbg = getResources().getDrawable(R.drawable.bg18);
+        		break;
+        	case 19:
+        		mbg = getResources().getDrawable(R.drawable.bg19);
+        		break;
+        }
+        mbg.setBounds((int) (left), (int) (top), (int) (left + side * 10), (int) (top + 20 * side));
 	}
 	
 	/*************************************************/
 	/* Draws the board *******************************/
 	/*************************************************/
-	/* Draws the walls and all the boxes *************/
+	/* Draws the walls, the bg and all the boxes *****/
 	/*************************************************/
 	@Override
     protected void onDraw(Canvas canvas) {
 		c = canvas;
-        super.onDraw(canvas); 
+        super.onDraw(canvas);
+        if (bg)
+        	mbg.draw(canvas);
         for (int i = 0; i < 102; i++)
         	wall[i].draw(c);
         for (int i = 0; i < 20; i++)
