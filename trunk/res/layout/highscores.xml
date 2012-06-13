@@ -12,14 +12,27 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent" android:orientation="vertical">
 
-		<TextView 
-		    android:textAppearance="?android:attr/textAppearanceLarge" 
-		    android:layout_width="fill_parent" 
-		    android:id="@+id/textViewHighScore1" 
-		    android:gravity="center_vertical|center_horizontal" 
-		    android:layout_height="fill_parent" 
-		    android:layout_weight=".5">
-		</TextView>
+		<LinearLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight=".5" android:paddingLeft="30dp">
+
+			<ImageView
+			    android:id="@+id/imageViewTrophy1"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_weight=".5" android:contentDescription="@string/first"/>
+
+			<TextView
+			    android:id="@+id/textViewHighScore1"
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"
+			    android:layout_weight=".5"
+			    android:gravity="center_vertical|center_horizontal"
+			    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+		</LinearLayout>
+
 		<TextView 
 		    android:gravity="center_vertical|center_horizontal" 
 		    android:id="@+id/textViewHighScore1Date" 
@@ -47,13 +60,26 @@
 	    android:gravity="center_vertical|center_horizontal"
 	    android:orientation="vertical" >
 
-	    <TextView
-	        android:id="@+id/textViewHighScore2"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:layout_weight=".5"
-	        android:gravity="center_vertical|center_horizontal"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
+		<LinearLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight=".5" android:paddingLeft="30dp">
+
+		    <ImageView
+		        android:id="@+id/imageViewTrophy2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_weight=".5" android:contentDescription="@string/second"/>
+
+		    <TextView
+		        android:id="@+id/textViewHighScore2"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:layout_weight=".5"
+		        android:gravity="center_vertical|center_horizontal"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+		</LinearLayout>
 
 	    <TextView
 	        android:id="@+id/textViewHighScore2Date"
@@ -80,13 +106,27 @@
 	    android:gravity="center_vertical|center_horizontal"
 	    android:orientation="vertical" >
 
-	    <TextView
-	        android:id="@+id/textViewHighScore3"
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:layout_weight=".5"
-	        android:gravity="center_vertical|center_horizontal"
-	        android:textAppearance="?android:attr/textAppearanceLarge" />
+		<LinearLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight=".5" android:paddingLeft="30dp">
+
+		    <ImageView
+		        android:id="@+id/imageViewTrophy3"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_weight=".5" 
+		        android:contentDescription="@string/third"/>
+
+		    <TextView
+		        android:id="@+id/textViewHighScore3"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:layout_weight=".5"
+		        android:gravity="center_vertical|center_horizontal"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+		</LinearLayout>
 
 	    <TextView
 	        android:id="@+id/textViewHighScore3Date"

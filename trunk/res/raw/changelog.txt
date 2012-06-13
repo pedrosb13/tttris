@@ -1,6 +1,17 @@
 TTTris changelog
 
 *****************************
+v0.9-beta - 13 Jun 2012 
+-Added 19 backgrounds
+-Added "Vibration" and "About backgrounds" preferences
+-Vibration and backgrounds preferences are now honored
+-Fixed a bug because of what score was not displayed
+-Now you can share your score with your friends
+-Fixed a couple of orthographic errors
+-Code improvements for future releases
+******************************
+
+*****************************
 v0.8.1-beta - 06 May 2012 
 -A dialog message is shown when the game is lost
 -Code improvements: Some this are cleaner now, and lots of comments
@@ -10,7 +21,7 @@ v0.8.1-beta - 06 May 2012
 v0.8-beta - 05 Feb 2012 
 -Lots of fixes when rotating pieces left
 -High scores are now saved with date
--Samall UI changes
+-Small UI changes
 -Minor bugs fixed
 ******************************
 

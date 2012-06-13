@@ -35,11 +35,18 @@
     <string name="preferencesSoundMusicEnabled">Music enabled</string>
     <string name="preferencesSoundMusicDisabled">Music disabled</string>
     <string name="preferencesGame">Game</string>
-    <string name="preferencesGameBackgrounds">Show board gackground</string>
+    <string name="preferencesGameVibration">Vibration</string>
+    <string name="preferencesGameVibrationChecked">Vibrate</string>
+    <string name="preferencesGameVibrationUnchecked">Don\'t vibrate</string>
+    <string name="preferencesGameBackgrounds">Show board background</string>
     <string name="preferencesGameBackgroundsChecked">Show</string>
     <string name="preferencesGameBackgroundsUnchecked">Dont show</string>
+    <string name="preferencesGameAboutBackgrounds">About backgrounds</string>
     <string name="preferencesScreen">Screen</string>	
     <string name="preferencesScreenKeepOn">Keep on</string>
     <string name="preferencesScreenKeepOnChecked">Screen will not lock</string>
     <string name="preferencesScreenKeepOnUnchecked">Screen will lock as usually</string>
+    <string name="shareScoreSelector">Share with#8230;</string>
+    <string name="shareScore1">I just scored </string>
+    <string name="shareScore2"> playing Tttris! \n\nCheck it out:\n\n[link]</string>
 </resources>

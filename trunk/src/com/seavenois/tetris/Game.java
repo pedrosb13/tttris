@@ -2,14 +2,17 @@ package com.seavenois.tetris;
 
 import java.util.Calendar;
 import java.util.Date;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +20,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /*************************************************/
 /* Main game activity ****************************/
@@ -45,6 +47,13 @@ public class Game extends Activity {
 	//The pause indicator
 	boolean game;
 	
+	//Preferences
+	boolean prefMusic;
+    boolean prefFX;
+    boolean prefVib;
+    boolean prefBg;
+    boolean prefScreen;
+	
     /*************************************************/
 	/* On activity creation **************************/
 	/*************************************************/
@@ -54,6 +63,16 @@ public class Game extends Activity {
 	/*************************************************/
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		
+		//Load preferences
+        SharedPreferences settings = getSharedPreferences("settings", 0);
+        prefMusic = settings.getBoolean("music", false);
+        prefFX = settings.getBoolean("fx", true);
+        prefVib = settings.getBoolean("vib", true);
+        prefBg = settings.getBoolean("backgrounds", true);
+        prefScreen = settings.getBoolean("keepon", true);
+        Log.e("Vib", Boolean.toString(prefVib));
+        
     	//Assign layouts
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -83,6 +102,8 @@ public class Game extends Activity {
         x = (int) (width * 0.05);
         y = (int) (height * 0.05);
         gameBoard.createWall(x, y, d);
+        if(prefBg)
+        	gameBoard.createBg(x, y, d);
         for (int i = 0; i < 20; i++){
         	x = (int) (width * 0.05);
         	for (int j = 0; j < 10; j++){
@@ -92,7 +113,6 @@ public class Game extends Activity {
         	}
         	y = y + d;
         };
-        
         
         //initialize vibrator
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -120,7 +140,7 @@ public class Game extends Activity {
 	    	public void onClick(View v) {
 	    		unDraw();
 	    		currentPiece.moveRight();
-	    		vibrator.vibrate(30);
+	    		vibrate(30);
 	    		reDraw();
 			}
 	    });
@@ -128,7 +148,7 @@ public class Game extends Activity {
 	    	public void onClick(View v) {
 	    		unDraw();
 	    		currentPiece.moveLeft();
-	    		vibrator.vibrate(30);
+	    		vibrate(30);
 	    		reDraw();
 			}
 	    });
@@ -137,7 +157,7 @@ public class Game extends Activity {
 	    	public void onClick(View v) {
 	    		unDraw();
 	    		currentPiece.moveDown();
-	    		vibrator.vibrate(30);
+	    		vibrate(30);
 	    		reDraw();
 			}
 	    });
@@ -145,7 +165,7 @@ public class Game extends Activity {
 	    	public void onClick(View v) {
 	    		unDraw();
 	    		currentPiece.rotateRight();
-	    		vibrator.vibrate(30);
+	    		vibrate(30);
 	    		reDraw();
 			}
 	    });
@@ -153,7 +173,7 @@ public class Game extends Activity {
 	    	public void onClick(View v) {
 	    		unDraw();
 	    		currentPiece.rotateLeft();
-	    		vibrator.vibrate(30);
+	    		vibrate(30);
 	    		reDraw();
 			}
 	    });
@@ -167,7 +187,7 @@ public class Game extends Activity {
 	    			game = true;
 	    			btnPause.setText(R.string.pause);
 	    		}
-	    		vibrator.vibrate(30);	    		
+	    		vibrate(30);	    		
 			}
 	    });
 	    
@@ -295,7 +315,7 @@ public class Game extends Activity {
 		game = false;
 		//Vibrate if vibration is active in prefenrences
 		//TODO: See line above
-		vibrator.vibrate(1000);
+		vibrate(1000);
 		//Add high scores if needed
 		SharedPreferences highScores = getSharedPreferences("highScores", 0);
 		hScore1 = highScores.getInt("hScore1", 0);
@@ -338,7 +358,8 @@ public class Game extends Activity {
 		//TODO:Show a trophy icon if high score
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.gameover);
-		builder.setMessage(R.string.score)
+		String msg = getString(R.string.score)+ Integer.toString(score);
+		builder.setMessage(msg)
 		       .setCancelable(false)
 		       //A button to just quit. Finishes the activity, so the user returns to the main menu
 		       .setNegativeButton(R.string.exit, new DialogInterface.OnClickListener() {
@@ -350,9 +371,11 @@ public class Game extends Activity {
 		       //A button to just share score with an external app
 		       .setPositiveButton(R.string.shareScore, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
-		        	   //TODO: Implement this. Check if a finish() is necesary
-		        	   Toast toast = Toast.makeText(getBaseContext(), R.string.notImplemented, Toast.LENGTH_LONG);
-		        	   toast.show();
+		        	   Intent shareIntent = new Intent(Intent.ACTION_SEND);
+		        	   shareIntent.setType("text/plain");
+		        	   shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.shareScore1) + " " + Integer.toString(score) + " " + getString(R.string.shareScore2));
+		        	   shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+		        	   startActivity(Intent.createChooser(shareIntent, getString(R.string.shareScoreSelector)));
 		           }
 		       });
 		AlertDialog endGameAlert = builder.create();
@@ -398,6 +421,7 @@ public class Game extends Activity {
 	/* position down. ********************************/
 	/*************************************************/
     public void removeRow(int row){
+    	vibrate(500);
     	score = score + Values.SCORE_PER_ROW * combo;
     	textScore.setText(Integer.toString(score));
     	//Setcombo multiplier
@@ -456,5 +480,47 @@ public class Game extends Activity {
         			gameBoard.setColor(i, j, (byte) 0);
         		}
         	}
+    }
+    
+    /*************************************************/
+	/* On finish activity ****************************/
+	/*************************************************/
+	/* Saves the game if it's running. Otherwise it **/
+	/* deletes last saved game ***********************/
+	/*************************************************/
+    @Override	
+    public void onDestroy(){ //TODO: Implement. Check back button behavior
+    	if (game){ //If the game is running. //TODO: Check behavior when game is paused
+    		//Save state of all boxes
+    		//Save current piece
+    		//Save next piece
+    		//Save score
+    		//Save combo
+    		game = false; //Actually pauses the game
+    		super.onDestroy();
+    	}
+    }
+    
+    /*************************************************/
+	/* Load game *************************************/
+	/*************************************************/
+	/* Loads saved game state. Returns false if unable/
+	/*************************************************/
+    public boolean loadGame(){ //TODO: Implement
+    	//Load board state
+    	//Load current piece
+    	//Load next piece
+    	//Load score
+    	//Load combo
+    	return true;
+    }
+    
+    public boolean vibrate(int time){
+    	if (prefVib == true){
+    		vibrator.vibrate(time);
+    		return true;
+    	}
+    	else
+    		return false;
     }
 }
